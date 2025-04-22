@@ -4,11 +4,11 @@ from typing import Annotated, Any
 import aiofiles
 from aiopath import AsyncPath
 from fastapi import Depends, UploadFile
+
 from app.dependencies.file import get_upload_dir
 
 
 class FileRepository:
-
     def __init__(self, upload_dir: Annotated[AsyncPath, Depends(get_upload_dir)]):
         self.upload_dir = upload_dir
 
@@ -22,9 +22,7 @@ class FileRepository:
             await buffer.write(await file.read())
         return {"filename": file.filename, "type": file.read()}
 
-    async def get_path(self, filename: str) -> str|None:
+    async def get_path(self, filename: str) -> str | None:
         async for content in AsyncPath(self.upload_dir).rglob(filename):
             return str(content)
         return None
-
-

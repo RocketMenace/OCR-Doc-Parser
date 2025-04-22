@@ -1,5 +1,7 @@
-from fastapi import APIRouter, Depends, status, UploadFile
 from typing import Annotated
+
+from fastapi import APIRouter, Depends, UploadFile, status
+
 from app.services.parser import PDFParserService
 
 router = APIRouter(prefix="/parse", tags=["Parser"])
@@ -10,6 +12,3 @@ async def retrieve_images(
     filename: str, service: Annotated[PDFParserService, Depends()]
 ):
     return await service.retrieve_images(filename)
-
-
-

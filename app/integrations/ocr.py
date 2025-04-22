@@ -1,6 +1,8 @@
 from typing import Annotated
+
 from fastapi import Depends
 from mistralai import Mistral
+
 from app.config.settings import config
 
 

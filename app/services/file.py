@@ -1,10 +1,11 @@
-from fastapi import UploadFile, Depends
-from app.repository.file import FileRepository
 from typing import Annotated
+
+from fastapi import Depends, UploadFile
+
+from app.repository.file import FileRepository
 
 
 class FileService:
-
     def __init__(self, repository: Annotated[FileRepository, Depends()]):
         self.repository = repository
 
