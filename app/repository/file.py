@@ -1,0 +1,21 @@
+from typing import Annotated
+
+import aiofiles
+from aiopath import AsyncPath
+from fastapi import Depends, UploadFile
+from app.dependencies.file import get_upload_dir
+
+
+class FileRepository:
+
+    def __init__(self, upload_dir: Annotated[AsyncPath, Depends(get_upload_dir)]):
+        self.upload_dir = upload_dir
+
+    async def save(self, file: UploadFile):
+        if not await AsyncPath.exists(self.upload_dir):
+            await AsyncPath.mkdir(self.upload_dir)
+        filepath = self.upload_dir / file.filename
+        async with aiofiles.open(filepath, mode="wb") as buffer:
+            await buffer.write(await file.read())
+        return {"filename": file.filename, "type": file.content_type}
+
