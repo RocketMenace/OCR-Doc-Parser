@@ -10,7 +10,6 @@ class BaseConfig(BaseSettings):
 
 class DevConfig(BaseConfig):
     model_config = SettingsConfigDict(env_prefix="DEV_")
-    MISTRAL_API_KEY: str
     BASE_FILES_DIR: str = "app/files"
 
 

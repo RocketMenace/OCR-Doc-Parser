@@ -6,10 +6,10 @@ router = APIRouter(prefix="/parse", tags=["Parser"])
 
 
 @router.get(path="/pdf", status_code=status.HTTP_200_OK)
-def retrieve_images(
+async def retrieve_images(
     filename: str, service: Annotated[PDFParserService, Depends()]
 ):
-    return service.retrieve_images(filename)
+    return await service.retrieve_images(filename)
 
 
 
