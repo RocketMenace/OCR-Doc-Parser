@@ -6,7 +6,7 @@ __pycache__/
 # C extensions
 *.so
 
-/files
+app/files/
 # Distribution / packaging
 .Python
 build/
